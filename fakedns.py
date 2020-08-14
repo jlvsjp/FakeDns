@@ -239,9 +239,8 @@ class A(DNSResponse):
 
         return bytes(data)
 
+
 # Implemented
-
-
 class AAAA(DNSResponse):
     def __init__(self, query, address):
         super(AAAA, self).__init__(query)
@@ -259,9 +258,8 @@ class AAAA(DNSResponse):
         # just returns the first answer and only the address
         ip = result[0][4][0]
 
+
 # Implemented
-
-
 class CNAME(DNSResponse):
     def __init__(self, query, domain):
         super(CNAME, self).__init__(query)
@@ -523,6 +521,7 @@ class RuleEngine2:
                 except socket.error:
                     logging.info(">> Could not get your IP address from your "
                                  "DNS Server.")
+
                     self_ip = '127.0.0.1'
                 ips[ips.index(ip)] = self_ip
         return ips
@@ -633,7 +632,6 @@ class RuleEngine2:
                     return NONEFOUND(query).make_packet()
 
                 response = CASE[query.type](query, response_data)
-
                 logging.info(">> Matched Request - " + query.domain.decode())
                 return response.make_packet()
 
@@ -686,6 +684,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(
         description='FakeDNS - A Python DNS Server')
+
     parser.add_argument(
         '-c', dest='path', action='store', required=True,
         help='Path to configuration file')
